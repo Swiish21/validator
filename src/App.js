@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import validator from 'validator';
+import './index.css'; // Import the new CSS file
 
-function App() {
+const App = () => {
+  const [errorMessage, setErrorMessage] = useState('');
+  const [password, setPassword] = useState('');
+
+  const validate = (value) => {
+    if (validator.isStrongPassword(value, {
+      minLength: 8,
+      minLowercase: 1,
+      minUppercase: 1,
+      minNumbers: 1,
+      minSymbols: 1
+    })) {
+      setErrorMessage('This is a strong Password');
+    } else {
+      setErrorMessage('This is not a strong Password');
+    }
+  };
+
+  const handleInputChange = (e) => {
+    setPassword(e.target.value);
+    validate(e.target.value);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="password-strength-checker">
+      <h2>Checking Password Strength in ReactJS</h2>
+      <input
+        type="text"
+        value={password}
+        onChange={handleInputChange}
+        className="password-input"
+        placeholder="Enter Password"
+      />
+      {errorMessage === '' ? null : (
+        <span className={errorMessage.includes('strong') ? 'strong-password' : 'error-message'}>
+          {errorMessage}
+        </span>
+      )}
     </div>
   );
-}
+};
 
 export default App;
