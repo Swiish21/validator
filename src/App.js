@@ -16,7 +16,7 @@ const App = () => {
     })) {
       setErrorMessage('This is a strong Password');
     } else {
-      setErrorMessage('This is not a strong Password');
+      setErrorMessage('This is not a strong Password, try again');
     }
   };
 
