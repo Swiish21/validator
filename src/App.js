@@ -20,6 +20,11 @@ const App = () => {
     }
   };
 
+  /**
+   * Handles input change of the password input field, updates the state
+   * of the password and validates the password.
+   * @param {object} e - the event object
+   */
   const handleInputChange = (e) => {
     setPassword(e.target.value);
     validate(e.target.value);
