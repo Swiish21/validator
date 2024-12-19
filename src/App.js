@@ -6,6 +6,11 @@ const App = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [password, setPassword] = useState('');
 
+  /**
+   * Validate a given password.
+   * @param {string} value The password to check.
+   * @returns {void}
+   */
   const validate = (value) => {
     if (validator.isStrongPassword(value, {
       minLength: 8,
